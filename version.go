@@ -152,18 +152,6 @@ func (v *Version) Compare(other *Version) int {
 	return 0
 }
 
-// UnmarshalJSON implements the json.Unmarshaler interface
-// Unmarshals a string into a Version
-func (v *Version) UnmarshalJSON(data []byte) error {
-	ver, err := NewVersion(string(data))
-	if err != nil {
-		return err
-	}
-
-	*v = *ver
-	return nil
-}
-
 // UnmarshalYAML implements the yaml.Unmarshaler interface
 // Unmarshals a string into a Version
 func (v *Version) UnmarshalYAML(unmarshal func(interface{}) error) error {
@@ -179,13 +167,25 @@ func (v *Version) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-// MarshalYAML implements the yaml.Marshaler interface
+// UnmarshalJSON implements the json.Unmarshaler interface
+// Unmarshals a string into a Version
+func (v *Version) UnmarshalJSON(data []byte) error {
+	ver, err := NewVersion(string(data))
+	if err != nil {
+		return err
+	}
+
+	*v = *ver
+	return nil
+}
+
+// MarshalJSON implements the json.Marshaler interface
 // Marshals a Version into a string
 func (v *Version) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("\"%s\"", v.String())), nil
 }
 
-// MarshalJSON implements the json.Marshaler interface
+// MarshalYAML implements the yaml.Marshaler interface
 // Marshals a Version into a string
 func (v *Version) MarshalYAML() (interface{}, error) { return v.String(), nil }
 
