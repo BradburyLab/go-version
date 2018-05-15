@@ -170,7 +170,7 @@ func (v *Version) UnmarshalYAML(unmarshal func(interface{}) error) error {
 // UnmarshalJSON implements the json.Unmarshaler interface
 // Unmarshals a string into a Version
 func (v *Version) UnmarshalJSON(data []byte) error {
-	ver, err := NewVersion(string(data))
+	ver, err := NewVersion(strings.Replace(string(data), "\"", "", -1))
 	if err != nil {
 		return err
 	}
