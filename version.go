@@ -181,13 +181,13 @@ func (v *Version) UnmarshalJSON(data []byte) error {
 
 // MarshalJSON implements the json.Marshaler interface
 // Marshals a Version into a string
-func (v *Version) MarshalJSON() ([]byte, error) {
+func (v Version) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("\"%s\"", v.String())), nil
 }
 
 // MarshalYAML implements the yaml.Marshaler interface
 // Marshals a Version into a string
-func (v *Version) MarshalYAML() (interface{}, error) { return v.String(), nil }
+func (v Version) MarshalYAML() (interface{}, error) { return v.String(), nil }
 
 func allZero(segs []int) bool {
 	for _, s := range segs {
